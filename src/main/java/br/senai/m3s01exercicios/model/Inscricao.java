@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "INSCRICOES")
-public class Incricao {
+public class Inscricao {
 
     @Id
     @Column(name = "ID_INSCRICAO")
@@ -18,9 +18,9 @@ public class Incricao {
     @JoinColumn(name = "CODIGO_CURSO", referencedColumnName = "CODIGO_CURSO")
     private Curso curso;
 
-    public Incricao() {}
+    public Inscricao() {}
 
-    public Incricao(String id, Aluno aluno, Curso curso) {
+    public Inscricao(String id, Aluno aluno, Curso curso) {
         this.id = id;
         this.aluno = aluno;
         this.curso = curso;
