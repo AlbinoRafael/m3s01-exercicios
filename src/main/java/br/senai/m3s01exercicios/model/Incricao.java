@@ -10,10 +10,12 @@ public class Incricao {
     @Column(name = "ID_INSCRICAO")
     private String id;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "MATRICULA_ALUNO", referencedColumnName = "MATRICULA_ALUNO")
     private Aluno aluno;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "CODIGO_CURSO", referencedColumnName = "CODIGO_CURSO")
     private Curso curso;
 
     public Incricao() {}
