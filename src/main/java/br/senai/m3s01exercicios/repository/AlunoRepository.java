@@ -1,4 +1,4 @@
-package Repository;
+package br.senai.m3s01exercicios.repository;
 
 import br.senai.m3s01exercicios.model.Aluno;
 
@@ -22,22 +22,7 @@ public class AlunoRepository {
         em.persist(aluno);
     }
 
-    public List<Aluno> obterTodos(){
-        List<Aluno> alunos = em.createQuery("SELECT a FROM Aluno a", Aluno.class).getResultList();
-        return alunos;
-    }
-
-    public Optional<Aluno> obterPorMatricula(String matricula){
-        TypedQuery<Aluno> query = em.createQuery("SELECT a FROM Aluno a WHERE a.matricula = ?1", Aluno.class);
-        try {
-            Aluno aluno = query.setParameter(1, matricula).getSingleResult();
-            return Optional.of(aluno);
-        } catch (NoResultException e) {
-            return Optional.empty();
-        }
-    }
-
-    public void deletar(String matricula){
+    public void deletar(Integer matricula){
         Aluno aluno = em.find(Aluno.class, matricula);
         em.remove(aluno);
     }
@@ -46,5 +31,19 @@ public class AlunoRepository {
         Aluno alunoBD = em.find(Aluno.class, alterado.getMatricula());
         alunoBD.setNome(alterado.getNome());
         em.merge(alunoBD);
+    }
+
+    public List<Aluno> obterTodos(){
+        return em.createQuery("SELECT a FROM Aluno a", Aluno.class).getResultList();
+    }
+
+    public Optional<Aluno> obterPorMatricula(Integer matricula){
+        TypedQuery<Aluno> query = em.createQuery("SELECT a FROM Aluno a WHERE a.matricula = ?1", Aluno.class);
+        try {
+            Aluno aluno = query.setParameter(1, matricula).getSingleResult();
+            return Optional.of(aluno);
+        } catch (NoResultException e) {
+            return Optional.empty();
+        }
     }
 }

@@ -8,7 +8,7 @@ public class Inscricao {
 
     @Id
     @Column(name = "ID_INSCRICAO")
-    private String id;
+    private Integer id;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "MATRICULA_ALUNO", referencedColumnName = "MATRICULA_ALUNO")
@@ -20,17 +20,17 @@ public class Inscricao {
 
     public Inscricao() {}
 
-    public Inscricao(String id, Aluno aluno, Curso curso) {
+    public Inscricao(Integer id, Aluno aluno, Curso curso) {
         this.id = id;
         this.aluno = aluno;
         this.curso = curso;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

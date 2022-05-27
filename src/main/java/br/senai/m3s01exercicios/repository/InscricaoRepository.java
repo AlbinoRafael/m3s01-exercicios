@@ -1,4 +1,4 @@
-package Repository;
+package br.senai.m3s01exercicios.repository;
 
 import br.senai.m3s01exercicios.model.Inscricao;
 
@@ -23,8 +23,7 @@ public class InscricaoRepository {
     }
 
     public List<Inscricao> obterTodos(){
-        List<Inscricao> inscricoes = em.createQuery("SELECT i FROM Inscricao i", Inscricao.class).getResultList();
-        return inscricoes;
+        return em.createQuery("SELECT i FROM Inscricao i", Inscricao.class).getResultList();
     }
 
     public Optional<Inscricao> obter(Integer id){

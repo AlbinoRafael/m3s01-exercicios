@@ -1,4 +1,4 @@
-package Repository;
+package br.senai.m3s01exercicios.repository;
 
 import br.senai.m3s01exercicios.model.Curso;
 
@@ -22,9 +22,20 @@ public class CursoRepository {
         em.persist(curso);
     }
 
+    public void deletar(String codigo){
+        Curso curso = em.find(Curso.class, codigo);
+        em.remove(curso);
+    }
+
+    public void atualizar(Curso alterado){
+        Curso cursoBD = em.find(Curso.class, alterado.getCodigo());
+        cursoBD.setAssunto(alterado.getAssunto());
+        cursoBD.setDuracao(alterado.getDuracao());
+        em.merge(cursoBD);
+    }
+
     public List<Curso> obterTodos(){
-        List<Curso> cursos = em.createQuery("SELECT c FROM Curso c", Curso.class).getResultList();
-        return cursos;
+        return em.createQuery("SELECT c FROM Curso c", Curso.class).getResultList();
     }
 
     public Optional<Curso> obterPorCodigo(String codigo){
@@ -37,15 +48,5 @@ public class CursoRepository {
         }
     }
 
-    public void deletar(String codigo){
-        Curso curso = em.find(Curso.class, codigo);
-        em.remove(curso);
-    }
 
-    public void atualizar(Curso alterado){
-        Curso cursoBD = em.find(Curso.class, alterado.getCodigo());
-        cursoBD.setAssunto(alterado.getAssunto());
-        cursoBD.setDuracao(alterado.getDuracao());
-        em.merge(cursoBD);
-    }
 }
