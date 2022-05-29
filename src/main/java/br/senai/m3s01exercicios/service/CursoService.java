@@ -47,6 +47,7 @@ public class CursoService {
         Optional<Curso> cursoOpt = cursoRepository.obterPorCodigo(codigo);
         return cursoOpt.orElseThrow(() -> new RegistroNaoEncontradoException("Curso", codigo));
     }
+
     public Curso obterCursoPorCodigo(String codigo) {
         Optional<Curso> cursoOpt = cursoRepository.obterPorCodigo(codigo);
         return cursoOpt.orElseThrow(() -> new RegistroNaoEncontradoException("Curso", codigo));
