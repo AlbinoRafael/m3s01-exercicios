@@ -15,12 +15,6 @@ public class Aluno {
 
     private String nome;
 
-    public Aluno() {}
-
-    public Aluno(Integer matricula, String nome) {
-        this.matricula = matricula;
-        this.nome = nome;
-    }
     public Integer getMatricula() {
         return matricula;
     }

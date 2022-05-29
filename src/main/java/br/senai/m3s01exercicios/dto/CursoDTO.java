@@ -1,23 +1,26 @@
-package br.senai.m3s01exercicios.model;
+package br.senai.m3s01exercicios.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import java.io.Serializable;
 
-@Entity
-@Table(name = "CURSOS")
-public class Curso {
+public class CursoDTO implements Serializable {
 
-
-    @Id
-    @Column(name = "CODIGO_CURSO")
+    @NotEmpty
     private String codigo;
 
+    @NotEmpty
     private String assunto;
 
     private Integer duracao; //em dias
 
+    public CursoDTO() {
+    }
+
+    public CursoDTO(String codigo, String assunto, Integer duracao) {
+        this.codigo = codigo;
+        this.assunto = assunto;
+        this.duracao = duracao;
+    }
 
     public String getCodigo() {
         return codigo;

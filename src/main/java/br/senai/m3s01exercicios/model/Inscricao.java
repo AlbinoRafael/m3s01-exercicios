@@ -17,15 +17,7 @@ public class Inscricao {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "CODIGO_CURSO", referencedColumnName = "CODIGO_CURSO")
     private Curso curso;
-
-    public Inscricao() {}
-
-    public Inscricao(Integer id, Aluno aluno, Curso curso) {
-        this.id = id;
-        this.aluno = aluno;
-        this.curso = curso;
-    }
-
+    
     public Integer getId() {
         return id;
     }
