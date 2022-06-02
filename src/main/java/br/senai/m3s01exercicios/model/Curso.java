@@ -18,6 +18,14 @@ public class Curso {
 
     private Integer duracao; //em dias
 
+    public Curso() {
+    }
+
+    public Curso(String codigo, String assunto, Integer duracao) {
+        this.codigo = codigo;
+        this.assunto = assunto;
+        this.duracao = duracao;
+    }
 
     public String getCodigo() {
         return codigo;

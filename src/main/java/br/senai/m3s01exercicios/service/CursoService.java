@@ -7,10 +7,7 @@ import br.senai.m3s01exercicios.repository.CursoRepository;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RequestScoped
 public class CursoService {
@@ -20,13 +17,13 @@ public class CursoService {
 
     public Curso inserir(Curso curso) {
         verificarSeExisteCursoPorCodigo(curso);
+        curso.setCodigo(UUID.randomUUID().toString());
         cursoRepository.salvar(curso);
         return curso;
     }
 
     public Curso alterar(Curso curso) {
         obterCursoPorCodigo(curso.getCodigo());
-        verificarSeExisteCursoPorCodigo(curso);
         cursoRepository.atualizar(curso);
         return curso;
     }
@@ -52,7 +49,7 @@ public class CursoService {
         Optional<Curso> cursoOpt = cursoRepository.obterPorCodigo(codigo);
         return cursoOpt.orElseThrow(() -> new RegistroNaoEncontradoException("Curso", codigo));
     }
-    private void verificarSeExisteCursoPorCodigo(Curso curso) {
+    public void verificarSeExisteCursoPorCodigo(Curso curso) {
         Optional<Curso> cursoOpt = cursoRepository.obterPorCodigo(curso.getCodigo());
         if (cursoOpt.isPresent())
             throw new RegistroExistenteException("Curso", curso.getCodigo());
