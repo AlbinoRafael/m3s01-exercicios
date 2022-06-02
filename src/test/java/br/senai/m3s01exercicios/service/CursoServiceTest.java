@@ -53,8 +53,9 @@ class CursoServiceTest {
     @Test
     @DisplayName("Quando curso não for encontrado, não altera e Deve lançar exceção")
     void alterarCurso_falha() {
+        Curso curso = new Curso("codigo", "assunto", 30);
         when(cursoRepository.obterPorCodigo(anyString())).thenReturn(Optional.empty());
-        assertThrows(RegistroNaoEncontradoException.class, () -> cursoService.obterCursoPorCodigo(anyString()));
+        assertThrows(RegistroNaoEncontradoException.class, () -> cursoService.alterar(curso));
     }
 
 
@@ -64,7 +65,13 @@ class CursoServiceTest {
         Curso curso = new Curso("codigo", "assunto", 30);
         when(cursoRepository.obterPorCodigo(anyString())).thenReturn(Optional.of(curso));
         Curso result = cursoService.alterar(curso);
+
         assertNotNull(result);
+        assertInstanceOf(Curso.class, result);
+        assertNotNull(result.getCodigo());
+        assertNotNull(result.getAssunto());
+        assertNotNull(result.getDuracao());
+
     }
 
     @Test
@@ -75,7 +82,6 @@ class CursoServiceTest {
     }
 
     @Test
-
     @DisplayName("Quando excluir com sucesso, não deve lançar exceção")
     void excluirCurso_sucesso() {
         when(cursoRepository.obterPorCodigo(anyString())).thenReturn(Optional.of(new Curso()));
@@ -90,7 +96,7 @@ class CursoServiceTest {
     }
 
     @Test
-    @DisplayName("Quando video existir, Deve retornar curso instanciado")
+    @DisplayName("Quando curso existir, Deve retornar curso instanciado")
     void obterCursoPorCodigo_sucesso(){
         Curso curso = new Curso("codigo", "assunto", 30);
         when(cursoRepository.obterPorCodigo(anyString())).thenReturn(Optional.of(curso));

@@ -26,7 +26,6 @@ public class AlunoService {
 
     public Aluno alterar(Aluno aluno) {
         obterAlunoPorMatricula(aluno.getMatricula());
-        verificarSeExisteAlunoPorMatricula(aluno);
         alunoRepository.atualizar(aluno);
         return aluno;
     }
@@ -48,7 +47,7 @@ public class AlunoService {
         Optional<Aluno> alunoOpt = alunoRepository.obterPorMatricula(matricula);
         return alunoOpt.orElseThrow(() -> new RegistroNaoEncontradoException("Aluno", matricula.toString()));
     }
-    private void verificarSeExisteAlunoPorMatricula(Aluno aluno) {
+    public void verificarSeExisteAlunoPorMatricula(Aluno aluno) {
         Optional<Aluno> alunoOpt = alunoRepository.obterPorMatricula(aluno.getMatricula());
         if (alunoOpt.isPresent())
             throw new RegistroExistenteException("Aluno", aluno.getMatricula().toString());
